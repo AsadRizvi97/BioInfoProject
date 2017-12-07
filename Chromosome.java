@@ -9,8 +9,12 @@ public class Chromosome {
     private String[] input;//input line
     private int fileIndex;
 
-    public void Chromosome(String[] line, int sample, int fileIndex) {
-        numOfSample = sample;
+    //@argument:
+    //line: format Chromosome Position Reference SNPS
+    //numberOfSample: total number of SNPs files being considered
+    //fileIndex: order of SNP file (first, second, third, etc sample)
+    public Chromosome(String[] line, int numberOfSample, int fileIndex) {
+        this.numOfSample = numberOfSample;
         tree = new DeluxeBST<>(numOfSample);
         input = line;
         this.fileIndex = fileIndex;
