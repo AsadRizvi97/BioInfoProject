@@ -31,6 +31,13 @@ public class Chromosome {
     public void update() {
         tree.put(Integer.parseInt(input[1]), input, fileIndex);
     }
-
+    //to take out which chromosome this is
+    public String position() {
+        return input[0];
+    }
+    //compare two chromosome. They are equal iff their positions are the same
+    public boolean equals(Chromosome that) {
+        return that.position().equals(this.input[0]);
+    }
 
 }
