@@ -3,6 +3,13 @@ import java.util.LinkedList;
 /**
  * Created by Bradley Pham on 12/4/2017.
  */
+/*This class is used for MBB101 - Bioinformatics at Clark University final project
+This BST only supports put() and print() method. Value has to be String[] but can be modified to suppport another data type.
+Usage: When building a new tree, user have to pass in the number of SNPs
+files they have.
+Time complexity: put(): O(logN), print(): O(N)
+
+* */
 public class DeluxeBST<Key extends Comparable<Key>, Object> {
 
     private class Node {
@@ -21,6 +28,8 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
     private Node root; //the root of the tree
     private int numOfSample; //to store the total number of samples
 
+    //Fetch the number of SNPs file to create the String[] for the first time node is created in the tree
+    //so that the tree just need to update position according to the input file.
     public DeluxeBST(int numOfSamp) {
         this.numOfSample = numOfSamp;
     }
@@ -32,7 +41,7 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
         }
         root = put(root, key, value, index);
     }
-
+    //-----------------Helper methods------------------------------
     private Node put(Node h, Key key, Object val, int indexFile) {
         if (h == null) {
             if (val instanceof String[]) {
@@ -51,7 +60,7 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
         if (cmp < 0) h.left = put(h.left, key, val, indexFile);
         else if (cmp > 0) h.right = put(h.right, key, val, indexFile);
         else {
-            if (h.val instanceof String[]) {
+            if (h.val instanceof String[]) {//update the array value of the existing node
                 String[] temp = ((String[]) h.val);
                 String[] temp2 = ((String[]) val);
                 temp[indexFile] = temp2[2];
@@ -92,8 +101,15 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
         h.left.color = !h.left.color;
         h.right.color = !h.right.color;
     }
-
-    //print out string with format: position
+    private void putToList(Node h, LinkedList<Object> output) {
+        if (h == null)
+            return;
+        putToList(h.left, output);
+        output.addLast(h.val);
+        putToList(h.right, output);
+    }
+    //-------------------------------------------------------------
+    // print out string with format: position sample1 sample2 ... sampleN Reference
     public void print() {
         Node t = root;
         LinkedList<Object> allNode = new LinkedList<>();
@@ -111,13 +127,7 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
         }
 
     }
-    private void putToList(Node h, LinkedList<Object> output) {
-        if (h == null)
-            return;
-        putToList(h.left, output);
-        output.addLast(h.val);
-        putToList(h.right, output);
-    }
+
 
     //testing
     public static void main(String[] args) {

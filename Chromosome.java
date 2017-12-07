@@ -10,8 +10,8 @@ public class Chromosome {
     private int fileIndex;
 
     public void Chromosome(String[] line, int sample, int fileIndex) {
-        tree = new DeluxeBST<>(5);
         numOfSample = sample;
+        tree = new DeluxeBST<>(numOfSample);
         input = line;
         this.fileIndex = fileIndex;
     }
@@ -23,16 +23,10 @@ public class Chromosome {
         tree.print();
     }
 
+    //to update chromosome if it already existed
     public void update() {
         tree.put(Integer.parseInt(input[1]), input, fileIndex);
     }
-    private void process() {
-        //may not have the reference yet, need to create an array to put into the tree
-        /*String[] val = tree.get(Integer.parseInt(input[1]));
-                val[fileIndex] = input[3];
-                tree.put(Integer.parseInt(input[1]), val);
-*/
 
-    }
 
 }
