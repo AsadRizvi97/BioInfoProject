@@ -29,7 +29,14 @@ public class Chromosome {
     }
 
     //to update chromosome if it already existed
+<<<<<<< HEAD
+    //@param:
+    //line: line extract from VCF file
+    //fileIndex: order of file (1st, 2nd, 3rd, etc)
+    public void update(String[] line, int fileIndex) {
+=======
     public void update(String[] line, int numberOfSample, int fileIndex) {
+>>>>>>> c1d474cd806f7d7f6d26945e0d481cf58cec7935
         tree.put(Integer.parseInt(line[1]), line, fileIndex);
     }
 
