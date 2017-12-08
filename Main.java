@@ -19,7 +19,7 @@ public class Main {
                 String[] line = {split[0], split[1], split[3], split[4]};
                 if (identifiers.contains(split[0])) { //If chromosome already exists, just update the old one already there
                     Chromosome chromosome = chromosomes.get(identifiers.indexOf(split[0]));
-                    chromosome.update(line, dataFiles.length, i + 1);
+                    chromosome.update(line, i + 1);
                 } else { //If no chromosome exists, create it
                     Chromosome chromosome = new Chromosome(line, dataFiles.length, i + 1);
                     chromosomes.add(chromosome);
@@ -31,7 +31,7 @@ public class Main {
     
     public void print() {
         for (Chromosome chromosome : chromosomes) { //For each chromosome, print Position | Reference | Sample 1 | Sample 2 etc.
-            System.out.printf("%-12s%-12s\n", "Chromosome",  chromosome.position());
+            System.out.printf("%-12s%-12s\n", "Chromosome",  chromosome.identifier());
             System.out.printf("%-12s%-12s", "Position", "Reference");
             for (int i = 0; i < numberOfSamples; i++) {
                 System.out.printf("%-6s %-5d", "Sample", i + 1);
