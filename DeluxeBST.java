@@ -49,8 +49,8 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
                 String[] temp = ((String[]) val);
                 String[] valArray = new String[numOfSample + 2];
                 valArray[0] = temp[1]; //copy the position
-                valArray[numOfSample + 1] = temp[3]; //copy the reference
-                valArray[indexFile] = temp[2];
+                valArray[numOfSample + 1] = temp[2]; //copy the reference
+                valArray[indexFile] = temp[3];
                 return new Node(key, (Object) valArray, RED);
             } else {
                 throw new IllegalArgumentException();
@@ -63,7 +63,7 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
             if (h.val instanceof String[]) {//update the array value of the existing node
                 String[] temp = ((String[]) h.val);
                 String[] temp2 = ((String[]) val);
-                temp[indexFile] = temp2[2];
+                temp[indexFile] = temp2[3];
 
             } else {
                 //we can modify the code in case we need to use BST for different type
@@ -109,7 +109,7 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
         putToList(h.right, output);
     }
     //-------------------------------------------------------------
-    // print out string with format: position sample1 sample2 ... sampleN Reference
+    // print out string with format: position reference sample1 sample2 ... sampleN
     public void print() {
         Node t = root;
         LinkedList<Object> allNode = new LinkedList<>();
@@ -118,14 +118,13 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
             String[] temp = (String[])allNode.removeFirst();
             for (int i = 0; i < temp.length; i++) {
                 if (temp[i] == null) {
-                    System.out.printf("%10s", temp[numOfSample + 1]);
+                    System.out.printf("%-12s", temp[numOfSample + 1]);
                 } else {
-                    System.out.printf("%10s", temp[i]);
+                    System.out.printf("%-12s", temp[i]);
                 }
             }
             System.out.println();
         }
-
     }
 
 

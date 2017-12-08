@@ -10,7 +10,7 @@ public class Chromosome {
     private int fileIndex;
 
     //@argument:
-    //line: format Chromosome Position Reference SNPS
+    //line: format Chromosome Position Reference SNPs
     //numberOfSample: total number of SNPs files being considered
     //fileIndex: order of SNP file (first, second, third, etc sample)
     public Chromosome(String[] line, int numberOfSample, int fileIndex) {
@@ -18,26 +18,28 @@ public class Chromosome {
         tree = new DeluxeBST<>(numOfSample);
         input = line;
         this.fileIndex = fileIndex;
+        update(line, numberOfSample, fileIndex);
     }
 
     //print each chromosome with all position.
     //Format: -------------------------------
-    //Position    Sample1     Sample2     Reference
+    //Position     Reference     Sample1     Sample2
     public void print() {
         tree.print();
     }
 
     //to update chromosome if it already existed
-    public void update() {
-        tree.put(Integer.parseInt(input[1]), input, fileIndex);
+    public void update(String[] line, int numberOfSample, int fileIndex) {
+        tree.put(Integer.parseInt(line[1]), line, fileIndex);
     }
+
     //to take out which chromosome this is
     public String position() {
         return input[0];
     }
+
     //compare two chromosome. They are equal iff their positions are the same
     public boolean equals(Chromosome that) {
         return that.position().equals(this.input[0]);
     }
-
 }
