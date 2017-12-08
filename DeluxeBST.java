@@ -26,12 +26,12 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
     }
     private static final boolean RED = true;
     private Node root; //the root of the tree
-    private int numOfSample; //to store the total number of samples
+    private int numOfSamples; //to store the total number of samples
 
     //Fetch the number of SNPs file to create the String[] for the first time node is created in the tree
     //so that the tree just need to update position according to the input file.
-    public DeluxeBST(int numOfSamp) {
-        this.numOfSample = numOfSamp;
+    public DeluxeBST(int numOfSamps) {
+        this.numOfSamples = numOfSamps;
     }
 
     public void put(Key key, Object value, int index) {
@@ -47,9 +47,9 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
             if (val instanceof String[]) {
                 //create new String array for that position node
                 String[] temp = ((String[]) val);
-                String[] valArray = new String[numOfSample + 2];
+                String[] valArray = new String[numOfSamples + 2];
                 valArray[0] = temp[1]; //copy the position
-                valArray[numOfSample + 1] = temp[2]; //copy the reference
+                valArray[numOfSamples + 1] = temp[2]; //copy the reference
                 valArray[indexFile] = temp[3];
                 return new Node(key, (Object) valArray, RED);
             } else {
@@ -115,12 +115,13 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
         LinkedList<Object> allNode = new LinkedList<>();
         putToList(t, allNode);
         while (!allNode.isEmpty()) {
-            String[] temp = (String[])allNode.removeFirst();
-            for (int i = 0; i < temp.length; i++) {
+            String[] temp = (String[]) allNode.removeFirst();
+            System.out.printf("%-13s%-13s", temp[0], temp[numOfSamples + 1]); // print Position | Reference
+            for (int i = 1; i < temp.length - 1; i++) { // print samples
                 if (temp[i] == null) {
-                    System.out.printf("%-12s", temp[numOfSample + 1]);
+                    System.out.printf("%-13s", temp[numOfSamples + 1]);
                 } else {
-                    System.out.printf("%-12s", temp[i]);
+                    System.out.printf("%-2s%-11s", temp[i], "(SNP)");
                 }
             }
             System.out.println();

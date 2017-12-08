@@ -31,10 +31,10 @@ public class Main {
     
     public void print() {
         for (Chromosome chromosome : chromosomes) { //For each chromosome, print Position | Reference | Sample 1 | Sample 2 etc.
-            System.out.printf("%-12s%-12s\n", "Chromosome",  chromosome.identifier());
-            System.out.printf("%-12s%-12s", "Position", "Reference");
+            System.out.printf("%-11s%s\n", "Chromosome",  chromosome.identifier());
+            System.out.printf("%-13s%-13s", "Position", "Reference");
             for (int i = 0; i < numberOfSamples; i++) {
-                System.out.printf("%-6s %-5d", "Sample", i + 1);
+                System.out.printf("%-7s%-6d", "Sample", i + 1);
             }
             System.out.println();
             chromosome.print();
