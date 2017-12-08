@@ -28,8 +28,11 @@ public class Chromosome {
     }
 
     //to update chromosome if it already existed
-    public void update() {
-        tree.put(Integer.parseInt(input[1]), input, fileIndex);
+    //@param:
+    //line: line extract from VCF file
+    //fileIndex: order of file (1st, 2nd, 3rd, etc)
+    public void update(String[] line, int fileIndex) {
+        tree.put(Integer.parseInt(line[1]), line, fileIndex);
     }
     //to take out which chromosome this is
     public String position() {
