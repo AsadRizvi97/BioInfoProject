@@ -18,8 +18,8 @@ public class Chromosome {
     //print each chromosome with all position.
     //Format: -------------------------------
     //Position     Reference     Sample1     Sample2
-    public void print() {
-        tree.print();
+    public void print(int label) {
+        tree.print(label);
     }
 
     //to update chromosome if it already existed

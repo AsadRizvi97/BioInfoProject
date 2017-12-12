@@ -110,18 +110,22 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
     }
     //-------------------------------------------------------------
     // print out string with format: position reference sample1 sample2 ... sampleN
-    public void print() {
+    public void print(int label) {
         Node t = root;
         LinkedList<Object> allNode = new LinkedList<>();
         putToList(t, allNode);
         while (!allNode.isEmpty()) {
             String[] temp = (String[]) allNode.removeFirst();
-            System.out.printf("%-13s%-13s", temp[0], temp[numOfSamples + 1]); // print Position | Reference
+            System.out.printf("%-10s%-11s", temp[0], temp[numOfSamples + 1]); // print Position | Reference
             for (int i = 1; i < temp.length - 1; i++) { // print samples
                 if (temp[i] == null) {
-                    System.out.printf("%-13s", temp[numOfSamples + 1]);
+                    System.out.printf("%-10s", temp[numOfSamples + 1]);
                 } else {
-                    System.out.printf("%-2s%-11s", temp[i], "(SNP)");
+                    if (label == 1) {
+                        System.out.printf("%-2s%-8s", temp[i], "(SNP)");
+                    } else {
+                        System.out.printf("%-10s", temp[i]);
+                    }
                 }
             }
             System.out.println();
@@ -163,6 +167,6 @@ public class DeluxeBST<Key extends Comparable<Key>, Object> {
             System.out.printf("%9s%d", "Sample ", i+1);
         }
         System.out.printf("%10s\n", "Reference");
-        testingTree.print();
+        testingTree.print(0);
     }
 }

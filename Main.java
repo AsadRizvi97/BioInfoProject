@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.LinkedList;
 import edu.princeton.cs.algs4.In;
 
@@ -29,21 +30,29 @@ public class Main {
         }
     }
     
-    public void print() {
+    public void print(int label) {
         for (Chromosome chromosome : chromosomes) { //For each chromosome, print Position | Reference | Sample 1 | Sample 2 etc.
             System.out.printf("%-11s%s\n", "Chromosome",  chromosome.identifier());
-            System.out.printf("%-13s%-13s", "Position", "Reference");
+            System.out.printf("%-10s%-11s", "Position", "Reference");
             for (int i = 0; i < numberOfSamples; i++) {
-                System.out.printf("%-7s%-6d", "Sample", i + 1);
+                System.out.printf("%-7s%-3d", "Sample", i + 1);
             }
             System.out.println();
-            chromosome.print();
+            chromosome.print(label);
             System.out.println();
         }
     }
     
     public static void main(String[] args) {
-        Main aligner = new Main(args);
-        aligner.print();
+        int label = 0;
+        Main aligner;
+        if (args[0].equals("-label") || args[0].equals("-l")) {
+            label = 1;
+            aligner = new Main(Arrays.copyOfRange(args, 1, args.length));
+        } else {
+            aligner = new Main(args);
+        }
+
+        aligner.print(label);
     }
 }
